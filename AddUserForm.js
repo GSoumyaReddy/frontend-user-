@@ -1,11 +1,14 @@
 import React,{useState} from 'react'
-import { useDispatch } from 'react-redux';
-import { AddUser } from '../actions/user';
+//import { Link } from 'react-router-dom';
+import {useDispatch} from 'react';
+import { addUser } from '../actions/user';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
-export default function addUserForm(props){
+export default function AddUserForm(props){
    
-const dispatch=useDispatch();
+const dispatch = useDispatch();
    /* const [id,setId]=useState(0);
    const [name,setName]=useState('')
    const [brand,setBrand]=useState('')
@@ -58,71 +61,85 @@ const submitHandler=(event)=>{event.preventDefault();
 if( !user.userLoginId || !user.userName || !user.password||!user.firstName||!user.lastName||
     !user.contact||!user.email) return;
  console.log(user+'from adduserform')
-props.addUser(user);
-dispatch(addUserForm(user));
+//props.addUser(user);
+dispatch(addUser(user));
 setUser(initialFormState);
 
 }
-return (<>
+return (
+   <Form onSubmit={submitHandler} >
+     <Form.Group className="mb-3" controlId="formBasicuserLoginId" >
+       <Form.Label>userLoginId</Form.Label>
+       <Form.Control type="number" placeholder="userLoginId" required
+        name='userLoginId'
+        value={user.userLoginId}
+       onChange={handleInputChange} />
+       
+     </Form.Group>
 
-   <form onSubmit={submitHandler}>
+     <Form.Group className="mb-3" controlId="formBasicUserName" >
+  <Form.Label>userName</Form.Label>
 
-<label>userLoginId</label>
-<input 
-type='number'
-name='userLoginId'
-value={user.userLoginId}
-onChange={handleInputChange}/>
+  <Form.Control type="Name" placeholder="userName" required
 
-<label>userName</label>
-<input 
-type='text'
-name='userName'
-value={user.userName}
-onChange={handleInputChange}/>
+       name='userName'
+       value={user.userName}
+       onChange={handleInputChange} />
 
-<label>password</label>
-<input 
-type='text'
-name='password'
-value={user.password}
-onChange={handleInputChange}/>
+</Form.Group>
 
-<label>firstName</label>
-<input 
-type='text'
-name='firstName'
-value={user.firstName}
-onChange={handleInputChange}/>
+     <Form.Group className="mb-3" controlId="formBasicPassword">
+     
+     <Form.Label>password</Form.Label>
+     
+       <Form.Control type="password" placeholder="password" required
 
-<label>lastName</label>
-<input 
-type='text'
-name='lastName'
-value={user.lastName}
-onChange={handleInputChange}/>
-
-<label>contact</label>
-<input 
-type='text'
-name='contact'
-value={user.contact}
-onChange={handleInputChange}/>
-
-<label>email</label>
-<input 
-type='text'
-name='email'
-value={user.email}
-onChange={handleInputChange}/>
-
-<button>Add New User</button>
-
-</form>
+       name='password'
+       value={user.password}
+       onChange={handleInputChange} />
 
 
-</>
-)
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      
+     </Form.Group>
 
+     <Form.Group className="mb-3" controlId="formBasicFirstName">
+       <Form.Label>firstName</Form.Label>
+       <Form.Control type="text"  placeholder="FirstName" required
+        name='firstName'
+        value={user.firstName}
+       onChange={handleInputChange} />
+     </Form.Group>
 
+     <Form.Group className="mb-3" controlId="formBasiLastName">
+       <Form.Label>lastName</Form.Label>
+       <Form.Control type="text"  placeholder="LastName" required
+         name='lastName'
+         value={user.lastName}
+       onChange={handleInputChange} />
+     </Form.Group>
+
+     <Form.Group className="mb-3" controlId="formBasicContact">
+       <Form.Label>contact</Form.Label>
+       <Form.Control type="text"  placeholder="ContactNo" required
+         name='contact'
+         value={user.contact}
+       onChange={handleInputChange} />
+     </Form.Group>
+
+     <Form.Group className="mb-3" controlId="formBasiEmail">
+       <Form.Label>email</Form.Label>
+       <Form.Control type="text"  placeholder="name@email.com" required
+         name='email'
+         value={user.email}
+       onChange={handleInputChange} />
+     </Form.Group>
+     
+     <Button variant="primary" type="submit">
+       Submit
+     </Button>
+   </Form>
+ );
 }
